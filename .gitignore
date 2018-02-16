@@ -57,3 +57,5 @@ typings/
 # dotenv environment variables file
 .env
 
+#Artworks aren't mine!
+./assets/images
