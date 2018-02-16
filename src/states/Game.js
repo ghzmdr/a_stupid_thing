@@ -34,19 +34,18 @@ export default class GameState extends Phaser.State {
     let x = 0
 
     if (this.cursor.right.isDown) {
-        x += 200
+      x += 200
     }
 
     if (this.cursor.left.isDown) {
-        x -= 200
+      x -= 200
     }
 
     this.sickBoy.body.velocity.x = x
 
     if (this.cursor.up.isDown && this.sickBoy.body.touching.down) {
-        this.sickBoy.body.velocity.y = -200
+      this.sickBoy.body.velocity.y = -200
     }
-
   }
 
   render() {

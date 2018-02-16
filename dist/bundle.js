@@ -10622,7 +10622,7 @@ window.game = new _Game2.default();
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 __webpack_require__(/*! pixi */ 127);
@@ -10654,24 +10654,24 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Game = function (_Phaser$Game) {
-    _inherits(Game, _Phaser$Game);
+  _inherits(Game, _Phaser$Game);
 
-    function Game() {
-        _classCallCheck(this, Game);
+  function Game() {
+    _classCallCheck(this, Game);
 
-        var width = _config2.default.gameWidth;
-        var height = _config2.default.gameHeight;
+    var width = _config2.default.gameWidth;
+    var height = _config2.default.gameHeight;
 
-        var _this = _possibleConstructorReturn(this, (Game.__proto__ || Object.getPrototypeOf(Game)).call(this, width, height, _phaser2.default.CANVAS, 'content', null));
+    var _this = _possibleConstructorReturn(this, (Game.__proto__ || Object.getPrototypeOf(Game)).call(this, width, height, _phaser2.default.CANVAS, 'content', null));
 
-        _this.state.add('Boot', _Boot2.default, false);
-        _this.state.add('Game', _Game2.default, false);
+    _this.state.add('Boot', _Boot2.default, false);
+    _this.state.add('Game', _Game2.default, false);
 
-        _this.state.start('Boot');
-        return _this;
-    }
+    _this.state.start('Boot');
+    return _this;
+  }
 
-    return Game;
+  return Game;
 }(_phaser2.default.Game);
 
 exports.default = Game;
@@ -10693,7 +10693,7 @@ exports.default = Game;
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -10711,46 +10711,46 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var BootState = function (_Phaser$State) {
-    _inherits(BootState, _Phaser$State);
+  _inherits(BootState, _Phaser$State);
 
-    function BootState() {
-        _classCallCheck(this, BootState);
+  function BootState() {
+    _classCallCheck(this, BootState);
 
-        return _possibleConstructorReturn(this, (BootState.__proto__ || Object.getPrototypeOf(BootState)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (BootState.__proto__ || Object.getPrototypeOf(BootState)).apply(this, arguments));
+  }
+
+  _createClass(BootState, [{
+    key: 'init',
+    value: function init() {
+      this._baseText = 'Loading';
+      this._dotsCount = 0;
     }
+  }, {
+    key: 'preload',
+    value: function preload() {
+      this._text = this.add.text(this.world.centerX, this.world.centerY, this._baseText, { font: '16px Arial', fill: '#ddd', align: 'center' });
+      this._text.anchor.setTo(0.5);
 
-    _createClass(BootState, [{
-        key: 'init',
-        value: function init() {
-            this._baseText = 'Loading';
-            this._dotsCount = 0;
-        }
-    }, {
-        key: 'preload',
-        value: function preload() {
-            this._text = this.add.text(this.world.centerX, this.world.centerY, this._baseText, { font: '16px Arial', fill: '#ddd', align: 'center' });
-            this._text.anchor.setTo(0.5);
+      this.load.image('sickboy', './assets/images/sickboy.png');
+      this.load.image('black-tile', './assets/images/black.png');
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      this._dotsCount++;
+      this._dotsCount %= 30;
 
-            this.load.image('sickboy', './assets/images/sickboy.png');
-            this.load.image('black-tile', './assets/images/black.png');
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            this._dotsCount++;
-            this._dotsCount %= 30;
+      var dots = '.'.repeat(this._dotsCount / 10 + 1);
+      this._text.setText(this._baseText + dots);
+    }
+  }, {
+    key: 'create',
+    value: function create() {
+      this.state.start('Game');
+    }
+  }]);
 
-            var dots = '.'.repeat(this._dotsCount / 10 + 1);
-            this._text.setText(this._baseText + dots);
-        }
-    }, {
-        key: 'create',
-        value: function create() {
-            this.state.start('Game');
-        }
-    }]);
-
-    return BootState;
+  return BootState;
 }(_phaser2.default.State);
 
 exports.default = BootState;
@@ -10926,7 +10926,7 @@ exports.default = SickBoy;
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _phaser = __webpack_require__(/*! phaser */ 47);
@@ -10948,33 +10948,38 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Level = function (_Phaser$Group) {
-    _inherits(Level, _Phaser$Group);
+  _inherits(Level, _Phaser$Group);
 
-    function Level(game) {
-        _classCallCheck(this, Level);
+  function Level(game) {
+    _classCallCheck(this, Level);
 
-        var _this = _possibleConstructorReturn(this, (Level.__proto__ || Object.getPrototypeOf(Level)).call(this, game));
+    var _this = _possibleConstructorReturn(this, (Level.__proto__ || Object.getPrototypeOf(Level)).call(this, game));
 
-        var TILE_W = 25;
-        var COLS = ~~(_config2.default.gameWidth / TILE_W) + 1;
-        var ROWS = ~~(_config2.default.gameHeight / TILE_W) + 1;
+    var TILE_W = 25;
+    var COLS = ~~(_config2.default.gameWidth / TILE_W) + 1;
+    var ROWS = ~~(_config2.default.gameHeight / TILE_W) + 1;
 
-        var map = (0, _lodash.flatten)(new Array(6).fill([' '.repeat(COLS)])).concat('x'.repeat(6) + ''.repeat(COLS - 6)).concat((0, _lodash.flatten)(new Array(ROWS - 7).fill([' '.repeat(COLS)])));
+    var map = (0, _lodash.flatten)(new Array(6).fill([' '.repeat(COLS)])).concat('x'.repeat(6) + ''.repeat(COLS - 6)).concat((0, _lodash.flatten)(new Array(ROWS - 7).fill([' '.repeat(COLS)])));
 
-        for (var i = 0; i < ROWS; ++i) {
-            for (var j = 0; j < COLS; ++j) {
-                if (map[i][j] === 'x') {
-                    var wall = _this.game.add.sprite(TILE_W * j, TILE_W * i, 'black-tile');
-                    wall.body.immovable = true;
-                    wall.anchor.x = wall.anchor.y = 0.5;
-                    _this.add(wall);
-                }
-            }
+    for (var i = 0; i < ROWS; ++i) {
+      for (var j = 0; j < COLS; ++j) {
+        var sprite = void 0;
+
+        if (map[i][j] === 'x') {
+          sprite = _this.game.add.sprite(TILE_W * j, TILE_W * i, 'black-tile');
+          sprite.body.immovable = true;
+          sprite.anchor.x = sprite.anchor.y = 0.5;
         }
-        return _this;
-    }
 
-    return Level;
+        if (sprite) {
+          _this.add(sprite);
+        }
+      }
+    }
+    return _this;
+  }
+
+  return Level;
 }(_phaser2.default.Group);
 
 exports.default = Level;
