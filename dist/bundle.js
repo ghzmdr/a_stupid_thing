@@ -10812,6 +10812,7 @@ var GameState = function (_Phaser$State) {
     value: function create() {
       this.game.physics.startSystem(_phaser2.default.Physics.ARCADE);
       this.game.stage.backgroundColor = '#2b2b2b';
+
       this.world.enableBody = true;
       this.world.setBounds(0, 0, _config2.default.gameWidth, 3500);
 
@@ -10822,33 +10823,13 @@ var GameState = function (_Phaser$State) {
       });
 
       this._level = new _base2.default(this.game);
-
       this.game.add.existing(this.sickBoy);
-      this.sickBoy.body.gravity.y = 600;
-
-      this.cursor = this.game.input.keyboard.createCursorKeys();
+      this.game.camera.follow(this.sickBoy);
     }
   }, {
     key: 'update',
     value: function update() {
       this.game.physics.arcade.collide(this.sickBoy, this._level);
-      this.game.camera.follow(this.sickBoy);
-
-      var x = 0;
-
-      if (this.cursor.right.isDown) {
-        x += 200;
-      }
-
-      if (this.cursor.left.isDown) {
-        x -= 200;
-      }
-
-      this.sickBoy.body.velocity.x = x;
-
-      if (this.cursor.up.isDown && this.sickBoy.body.touching.down) {
-        this.sickBoy.body.velocity.y = -200;
-      }
     }
   }, {
     key: 'render',
@@ -10880,6 +10861,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _phaser = __webpack_require__(/*! phaser */ 47);
 
 var _phaser2 = _interopRequireDefault(_phaser);
@@ -10905,8 +10888,35 @@ var SickBoy = function (_Phaser$Sprite) {
     var _this = _possibleConstructorReturn(this, (SickBoy.__proto__ || Object.getPrototypeOf(SickBoy)).call(this, game, x, y, 'sickboy'));
 
     _this.anchor.setTo(0.5);
+    _this.cursor = _this.game.input.keyboard.createCursorKeys();
+    _this.runKey = _this.game.input.keyboard.addKey(_phaser2.default.KeyCode.Z);
+    _this.jumpKey = _this.game.input.keyboard.addKey(_phaser2.default.KeyCode.X);
     return _this;
   }
+
+  _createClass(SickBoy, [{
+    key: 'update',
+    value: function update() {
+      var x = 0;
+      this.body.gravity.y = 600;
+
+      var speed = this.runKey.isDown ? 1.3 : 1;
+
+      if (this.cursor.right.isDown) {
+        x += 200 * speed;
+      }
+
+      if (this.cursor.left.isDown) {
+        x -= 200 * speed;
+      }
+
+      this.body.velocity.x = x;
+
+      if (this.jumpKey.isDown && this.body.touching.down) {
+        this.body.velocity.y = -200;
+      }
+    }
+  }]);
 
   return SickBoy;
 }(_phaser2.default.Sprite);
